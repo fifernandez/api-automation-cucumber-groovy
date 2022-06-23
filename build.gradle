@@ -1,0 +1,134 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+import groovy.json.JsonSlurper
+
+plugins {
+    id 'idea'
+    id 'groovy'
+    id 'se.thinkcode.cucumber-runner' version '0.0.11'
+    id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.1.24"
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+    google()
+}
+
+group 'ff.test'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testImplementation "org.codehaus.groovy:groovy-all:3.0.11"
+    testImplementation "io.cucumber:cucumber-groovy:6.10.4"
+    testImplementation "io.cucumber:cucumber-junit:7.3.2"
+    testImplementation "org.junit.vintage:junit-vintage-engine:5.8.2"
+    testImplementation "com.googlecode.json-simple:json-simple:1.1.1"
+    //testImplementation "org.apache.commons:commons-lang3:3.12.0"
+}
+
+test {
+    finalizedBy generateCucumberReports
+    if (System.getProperty("env") != null) {
+        systemProperty "env", System.getProperty("env")
+    }
+    if (System.getProperty("mode") != null) {
+        systemProperty "mode", System.getProperty("mode")
+    }
+    systemProperty "cucumber.filter.tags", getTags()
+    useJUnitPlatform()
+    systemProperty("cucumber.junit-platform.naming-strategy", "long")
+    testLogging {
+        events TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED
+    }
+    systemProperties(project.gradle.startParameter.systemPropertiesArgs)
+}
+
+cucumberReports {
+    outputDir = file('build/reports/')
+    buildId = '0'
+    reports = files('build/reports/cucumber.json')
+    excludeTags = ["@TestCaseID:(|\\w+)"]
+    expandAllSteps = false
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+cucumber {
+    main = 'io.cucumber.core.cli.Main'
+    glue = 'support'
+    tags = getTags()
+    plugin = [
+            "pretty",
+            "json:build/reports/cucumber.json",
+            "junit:build/reports/cucumber.xml",
+            "html:build/reports/cucumber-report.html",
+            "rerun:build/reports/rerun.txt",
+    ]
+}
+
+tasks.cucumber {
+    finalizedBy generateCucumberReports
+    if (System.getProperty("env") != null) {
+        systemProperty "env", System.getProperty("env")
+    }
+    if (System.getProperty("mode") != null) {
+        systemProperty "mode", System.getProperty("mode")
+    }
+}
+
+task runTests() {
+    dependsOn assemble, testClasses
+    finalizedBy generateCucumberReports
+    doLast {
+        javaexec {
+            mainClass = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            if (System.getProperty("env") != null) {
+                systemProperty "env", System.getProperty("env")
+            }
+            if (System.getProperty("mode") != null) {
+                systemProperty "mode", System.getProperty("mode")
+            }
+            systemProperty "cucumber.filter.tags", getTags()
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', "json:${reporting.baseDir}/cucumber.json",
+                    '--plugin', "junit:${reporting.baseDir}/cucumber.xml",
+                    '--plugin', "html:${reporting.baseDir}/cucumber-report.html",
+                    '--plugin', "rerun:${reporting.baseDir}/rerun.txt",
+                    '--glue', "src/test/resources/features",
+                    '--glue', "support"
+            ]
+        }
+    }
+}
+
+String getTags() {
+    def jsonFile = file("src/test/groovy/config/config.json")
+    def parsedJson = new JsonSlurper().parseText(jsonFile.text)
+    String defaultEnvironment = parsedJson.defaultEnvironment
+    List<String> environments = parsedJson.environments
+    String selectedEnv = System.getProperty("env")
+    String tags = ""
+    if (selectedEnv == null) {
+        tags = "@${defaultEnvironment}"
+    } else {
+        selectedEnv = selectedEnv.toLowerCase()
+        if (environments.contains(selectedEnv)) {
+            tags = "@${selectedEnv}"
+        } else {
+            tags = "@${defaultEnvironment}"
+        }
+    }
+    tags += " and not @disable"
+    if (System.getProperty("tags") != null) {
+        tags = "(" + tags + ") and (" + System.getProperty("tags") + ")"
+    }
+    return tags
+}
