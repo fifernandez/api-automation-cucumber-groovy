@@ -1,5 +1,7 @@
 # api-automation-cucumber-groovy
 
+[![cucumber-smoke-api-test-runner](https://github.com/fifernandez/api-automation-cucumber-groovy/actions/workflows/cucumber-test-runner.yml/badge.svg)](https://github.com/fifernandez/api-automation-cucumber-groovy/actions/workflows/cucumber-test-runner.yml)
+
 API Automation using Groovy, Cucumber and Gradle.
 
 To run the tests:
