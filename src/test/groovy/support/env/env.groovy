@@ -1,11 +1,16 @@
 package support.env
 
+import common.Environment
+import config.Configuration
 import groovy.json.JsonOutput
 import common.HttpConnector
 import io.cucumber.groovy.Hooks
 import io.cucumber.groovy.Scenario
 
 this.metaClass.mixin(Hooks)
+Configuration.loadAllConfigs()
+Environment.getEnvironment()
+Environment.getMode()
 
 Before() {
     HttpConnector.clearSession()

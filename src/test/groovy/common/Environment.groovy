@@ -1,9 +1,9 @@
 package common
 
 class Environment {
-    private static String defaultEnv = 'prod'
+    private static String defaultEnv = null
     private static String selectedEnv = null
-    private static String defaultMode = 'public'
+    private static String defaultMode = null
     private static String selectedMode = null
     private static ArrayList<String> environments = ['local', 'dev', 'qa', 'stage', 'prod']
     private static ArrayList<String> modes = ['private', 'public']

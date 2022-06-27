@@ -1,31 +1,14 @@
 package common
 
 class BasePath {
-    private static HashMap<String, HashMap<String, String>> basePaths = [
-            'local': [
-                    'private': '',
-                    'public' : ''
-            ],
-            'dev'  : [
-                    'private': '',
-                    'public' : ''
-            ],
-            'qa'   : [
-                    'private': '',
-                    'public' : ''
-            ],
-            'stage': [
-                    'private': '',
-                    'public' : ''
-            ],
-            'prod' : [
-                    'private': '',
-                    'public' : 'https://jsonplaceholder.typicode.com'
-            ]
-    ]
+    private static HashMap<String, HashMap<String, String>> basePaths
 
     static String getBasePath() {
         return basePaths.get(Environment.getEnvironment()).get(Environment.getMode());
+    }
+
+    static void setBasePaths(HashMap<String, HashMap<String, String>> newPaths) {
+        basePaths = newPaths
     }
 
 }
