@@ -2,6 +2,7 @@ bin/
 build/
 lib/
 out/
+.allure/
 .gradle/
 .idea/
 *.iml
