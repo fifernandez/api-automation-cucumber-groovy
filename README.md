@@ -1,6 +1,8 @@
 # api-automation-cucumber-groovy
 
-[![cucumber-smoke-api-test-runner](https://github.com/fifernandez/api-automation-cucumber-groovy/actions/workflows/cucumber-test-runner.yml/badge.svg)](https://github.com/fifernandez/api-automation-cucumber-groovy/actions/workflows/cucumber-test-runner.yml)
+[![cucumber-smoke-api-test-runner](https://github.com/fifernandez/api-automation-cucumber-groovy/actions/workflows/cucumber-test-runner.yml/badge.svg)](https://github.com/fifernandez/api-automation-cucumber-groovy/actions/workflows/cucumber-test-runner.yml) 
+
+[<img src="https://avatars.githubusercontent.com/u/5879127?s=200&v=4" width="15" alt="Allure Test Report"/> Allure Test Report](https://fifernandez.github.io/api-automation-cucumber-groovy)
 
 API Automation using Groovy, Cucumber and Gradle.
 
