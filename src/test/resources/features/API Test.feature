@@ -4,7 +4,8 @@ Feature: Rest API functionality Scenarios
   That the Rest API is working as expected
 
 
-  @TestCaseID:01 @smoke
+  @TestCaseID:01
+  @smoke @regression
   @1 @2 @prod
   Scenario Outline: Verify status code returned is expected
     Given I do a get to the "<Endpoint>" endpoint
@@ -17,6 +18,7 @@ Feature: Rest API functionality Scenarios
 
 
   @TestCaseID:02
+  @smoke @regression
   @2 @3 @prod
   Scenario Outline: Verify amount of returned items is expected
     Given I do a get to the "<Endpoint>" endpoint
@@ -29,7 +31,8 @@ Feature: Rest API functionality Scenarios
 
 
   @TestCaseID:03
-  @4 @disable @prod
-  Scenario: Verify status code returned is expected 2323
-    Given I do a get to the "users" endpoint just to test with bad parameters
-    Then the returned status code is: "205"
+  @regression
+  @4 @prod
+  Scenario: Just a failing test
+    Given I do a get to the "users" endpoint
+    Then the returned status code is: "404"
