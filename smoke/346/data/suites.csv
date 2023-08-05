@@ -1,0 +1,10 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sat Aug 05 02:19:25 GMT 2023","Sat Aug 05 02:19:25 GMT 2023","35","","Rest API functionality Scenarios","","Verify status code returned is expected","","Verify status code returned is expected","  As a developer
+  I want to be sure
+  That the Rest API is working as expected"
+"passed","Sat Aug 05 02:19:24 GMT 2023","Sat Aug 05 02:19:25 GMT 2023","634","","Rest API functionality Scenarios","","Verify status code returned is expected","","Verify status code returned is expected","  As a developer
+  I want to be sure
+  That the Rest API is working as expected"
+"passed","Sat Aug 05 02:19:25 GMT 2023","Sat Aug 05 02:19:25 GMT 2023","28","","Rest API functionality Scenarios","","Verify amount of returned items is expected","","Verify amount of returned items is expected","  As a developer
+  I want to be sure
+  That the Rest API is working as expected"
