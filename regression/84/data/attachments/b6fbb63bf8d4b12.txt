@@ -1,0 +1,5 @@
+Request: 
+curl --location --request GET 'https://jsonplaceholder.typicode.com/users' \
+--header 'Cache-Control: no-cache' \
+--header 'x-cache-control: no-cache' \
+--header 'content-type: application/json' \
