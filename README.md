@@ -46,4 +46,3 @@ Parameters:
         - Example: -Dtags="@2 and not @3"
         - A tag for the environment will be automatically added, so only scenarios that have the selected environment tag will run.
         - You can disable tests adding the tag @disable.
-

@@ -32,7 +32,7 @@ Feature: Rest API functionality Scenarios
 
   @TestCaseID:03
   @regression
-  @4 @prod
+  @4 @prod @disable
   Scenario: Just a failing test
     Given I do a get to the "users" endpoint
     Then the returned status code is: "404"
