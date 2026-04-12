@@ -1,0 +1,10 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"  As a developer
+  I want to be sure
+  That the Rest API is working as expected","45","Verify status code returned is expected","","Sun Apr 12 04:35:00 UTC 2026","passed","Sun Apr 12 04:35:00 UTC 2026","","Rest API functionality Scenarios","Verify status code returned is expected",""
+"  As a developer
+  I want to be sure
+  That the Rest API is working as expected","33","Verify amount of returned items is expected","","Sun Apr 12 04:35:00 UTC 2026","passed","Sun Apr 12 04:35:00 UTC 2026","","Rest API functionality Scenarios","Verify amount of returned items is expected",""
+"  As a developer
+  I want to be sure
+  That the Rest API is working as expected","581","Verify status code returned is expected","","Sun Apr 12 04:34:59 UTC 2026","passed","Sun Apr 12 04:35:00 UTC 2026","","Rest API functionality Scenarios","Verify status code returned is expected",""
